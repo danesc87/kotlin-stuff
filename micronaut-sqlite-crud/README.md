@@ -25,11 +25,13 @@ do that, the system must accomplish with the following requirements:
 > S = JobPositionSalary*RelationToHeadQuarter(This parameter show difference between salaries, example: In Spain the salary is 85% the salary in England, this must be configurable per each branch office)
 
 ## **Compile**
+
 ```
 ./gradlew build
 ```
 
 ## **Tests**
+
 ```
 ./gradlew test
 ```
@@ -41,11 +43,13 @@ do that, the system must accomplish with the following requirements:
 #### Branch Offices
 
 ##### *POST*
+
 ```
 http://$host/$service-name/offices
 ```
 
 *Body:*
+
 ```json
 {
   "branchOffice": "Cuenca",
@@ -56,11 +60,13 @@ http://$host/$service-name/offices
 ##### *GET*
 
 ###### *GET* All registers
+
 ```
 http://$host/$service-name/offices
 ```
 
 *Response:*
+
 ```json
 [
     {
@@ -77,11 +83,13 @@ http://$host/$service-name/offices
 ```
 
 ###### *GET* Branch Offices by ID
+
 ```
 http://$host/$service-name/offices/$id
 ```
 
 *Response:*
+
 ```json
 {
   "id": 1,
@@ -93,11 +101,13 @@ http://$host/$service-name/offices/$id
 #### Job Positions
 
 ##### *POST*
+
 ```
 http://$host/$service-name/job-positions
 ```
 
 *Body:*
+
 ```json
 {
   "positionName": "Software Developer"
@@ -107,11 +117,13 @@ http://$host/$service-name/job-positions
 ##### *GET*
 
 ###### *GET* All registers
+
 ```
 http://$host/$service-name/job-positions
 ```
 
 *Response:*
+
 ```json
 [
     {
@@ -126,11 +138,13 @@ http://$host/$service-name/job-positions
 ```
 
 ###### *GET* Job Positions by ID
+
 ```
 http://$host/$service-name/job-positions/$id
 ```
 
 *Response:*
+
 ```json
 {
   "id": 1,
@@ -141,11 +155,13 @@ http://$host/$service-name/job-positions/$id
 #### Salaries
 
 ##### *POST*
+
 ```
 http://$host/$service-name/salaries
 ```
 
 *Body:*
+
 ```json
 {
   "jobPositionId": 1,
@@ -156,11 +172,13 @@ http://$host/$service-name/salaries
 ##### *GET*
 
 ###### *GET* All registers
+
 ```
 http://$host/$service-name/salaries
 ```
 
 *Response:*
+
 ```json
 [
     {
@@ -177,11 +195,13 @@ http://$host/$service-name/salaries
 ```
 
 ###### *GET* Salary by ID
+
 ```
 http://$host/$service-name/salaries/$id
 ```
 
 *Response:*
+
 ```json
 {
   "id": 1,
@@ -193,11 +213,13 @@ http://$host/$service-name/salaries/$id
 #### Salary Parameters
 
 ##### *POST*
+
 ```
 http://$host/$service-name/salary-parameters
 ```
 
 *Body:*
+
 ```json
 {
   "salaryId": 1,
@@ -209,11 +231,13 @@ http://$host/$service-name/salary-parameters
 ##### *GET*
 
 ###### *GET* All registers
+
 ```
 http://$host/$service-name/salary-parameters
 ```
 
 *Response:*
+
 ```json
 [
     {
@@ -232,11 +256,13 @@ http://$host/$service-name/salary-parameters
 ```
 
 ###### *GET* Salary Parameter by ID
+
 ```
 http://$host/$service-name/salary-parameters/$id
 ```
 
 *Response:*
+
 ```json
 {
   "id": 1,
@@ -249,11 +275,13 @@ http://$host/$service-name/salary-parameters/$id
 #### Employees
 
 ##### *POST*
+
 ```
 http://$host/$service-name/employees
 ```
 
 *Body:*
+
 ```json
 {
   "name": "Daniel",
@@ -266,11 +294,13 @@ http://$host/$service-name/employees
 ##### *GET*
 
 ###### *GET* All registers
+
 ```
 http://$host/$service-name/employees
 ```
 
 *Response:*
+
 ```json
 [
     {
@@ -291,11 +321,13 @@ http://$host/$service-name/employees
 ```
 
 ###### *GET* Employees by ID
+
 ```
 http://$host/$service-name/employees/$id
 ```
 
 *Response:*
+
 ```json
 {
   "id": 1,
