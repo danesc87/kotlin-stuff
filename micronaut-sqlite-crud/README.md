@@ -9,6 +9,7 @@ This project is a small *CRUD* built with [**Micronaut**](http://micronaut.io/) 
 * Endpoints
     * *Branch Offices*
     * *Job Positions*
+    * *Salaries*
     * *Salary Parameters*
     * *Employees*
 
@@ -137,6 +138,58 @@ http://$host/$service-name/job-positions/$id
 }
 ```
 
+#### Salaries
+
+##### *POST*
+```
+http://$host/$service-name/salaries
+```
+
+*Body:*
+```json
+{
+  "jobPositionId": 1,
+  "salary": 3500.00
+}
+```
+
+##### *GET*
+
+###### *GET* All registers
+```
+http://$host/$service-name/salaries
+```
+
+*Response:*
+```json
+[
+    {
+      "id": 1,
+      "jobPositionId": 1,
+      "salary": 3500.00
+    },
+    {
+      "id": 2,
+      "jobPositionId": 2,
+      "salary": 2850.00
+    }
+]
+```
+
+###### *GET* Salary by ID
+```
+http://$host/$service-name/salaries/$id
+```
+
+*Response:*
+```json
+{
+  "id": 1,
+  "jobPositionId": 1,
+  "salary": 3500.00
+}
+```
+
 #### Salary Parameters
 
 ##### *POST*
@@ -147,8 +200,7 @@ http://$host/$service-name/salary-parameters
 *Body:*
 ```json
 {
-  "belongHeadQuarter": true,
-  "jobPositionId": 1,
+  "salaryId": 1,
   "branchOfficeId": 1,
   "relationToHeadQuarter": 1
 }
@@ -166,15 +218,13 @@ http://$host/$service-name/salary-parameters
 [
     {
       "id": 1,
-      "belongHeadQuarter": true,
-      "jobPositionId": 1,
+      "salaryId": 1,
       "branchOfficeId": 1,
       "relationToHeadQuarter": 1
     },
     {
       "id": 2,
-      "belongHeadQuarter": false,
-      "jobPositionId": 3,
+      "salaryId": 3,
       "branchOfficeId": 2,
       "relationToHeadQuarter": 0.87
     }
@@ -190,8 +240,7 @@ http://$host/$service-name/salary-parameters/$id
 ```json
 {
   "id": 1,
-  "belongHeadQuarter": true,
-  "jobPositionId": 1,
+  "salaryId": 1,
   "branchOfficeId": 1,
   "relationToHeadQuarter": 1
 }
