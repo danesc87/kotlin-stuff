@@ -31,7 +31,7 @@ do that, the system must accomplish with the following requirements:
 
 ## **Tests**
 ```
-./gradlew Tests
+./gradlew test
 ```
 
 ## **Run**
