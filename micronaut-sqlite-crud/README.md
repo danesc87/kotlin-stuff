@@ -22,7 +22,7 @@ do that, the system must accomplish with the following requirements:
 * If a employee exist in the system then cannot be associated to more than one branch office at a time
 * A employee must have only one job position
 * Salary must be calculated based on a formula:
-> S = JobPositionSalary*RelationToHeadQuarter(This parmeter show difference between salaries, example: In Spain the salary is 85% the salary in England, this must be configurable per each branch office)
+> S = JobPositionSalary*RelationToHeadQuarter(This parameter show difference between salaries, example: In Spain the salary is 85% the salary in England, this must be configurable per each branch office)
 
 ## **Compile**
 ```
