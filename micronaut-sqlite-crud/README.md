@@ -7,22 +7,20 @@ This project is a small *CRUD* built with [**Micronaut**](http://micronaut.io/) 
 * Tests
 * Run
 * Endpoints
-    * *Branch Offices*
-    * *Job Positions*
-    * *Salaries*
-    * *Salary Parameters*
-    * *Employees*
+    * *Schools*
+    * *Careers*
+    * *Persons*
+    * *Students*
 
 ## **General Context**
-A System that allow to create employees for a company and add it's job position and salary for each one, in order to
-do that, the system must accomplish with the following requirements:
+A System that allow to save some university information like Schools, Careers and Students. To make it work properly 
+the system must have the following instructions implemented.
 
-* System must allow the creation of branch offices and tag one of them as HeadQuarter
-* An employee should be associated to a branch office
-* If a employee exist in the system then cannot be associated to more than one branch office at a time
-* A employee must have only one job position
-* Salary must be calculated based on a formula:
-> S = JobPositionSalary*RelationToHeadQuarter(This parameter show difference between salaries, example: In Spain the salary is 85% the salary in England, this must be configurable per each branch office)
+* A University has *schools* like medical school or engineering school
+* A *School* has *careers* like Computer Science or Philosophy
+* A *career* must have semesters like Computer Science took 10 semesters to obtain a title
+* A *student* belongs to a *career*
+* A *student* is being in some *semester* of his/her *career*
 
 ## **Compile**
 
@@ -40,20 +38,19 @@ do that, the system must accomplish with the following requirements:
 
 ## **Endpoints**
 
-#### Branch Offices
+#### Schools
 
 ##### *POST*
 
 ```
-http://$host/$service-name/offices
+http://$host/$service-name/school
 ```
 
 *Body:*
 
 ```json
 {
-  "branchOffice": "Cuenca",
-  "isHeadQuarter": true
+  "schoolName": "Engineering School"
 }
 ```
 
@@ -62,7 +59,7 @@ http://$host/$service-name/offices
 ###### *GET* All registers
 
 ```
-http://$host/$service-name/offices
+http://$host/$service-name/school
 ```
 
 *Response:*
@@ -71,21 +68,19 @@ http://$host/$service-name/offices
 [
     {
       "id": 1,
-      "branchOffice": "Cuenca",
-      "isHeadQuarter": true
+      "schoolName": "Engineering School"
     },
     {
       "id": 2,
-      "branchOffice": "Tallin",
-      "isHeadQuarter": false
+      "schoolName": "Philosophy School"
     }
 ]
 ```
 
-###### *GET* Branch Offices by ID
+###### *GET* School by ID
 
 ```
-http://$host/$service-name/offices/$id
+http://$host/$service-name/school/$id
 ```
 
 *Response:*
@@ -93,24 +88,24 @@ http://$host/$service-name/offices/$id
 ```json
 {
   "id": 1,
-  "branchOffice": "Cuenca",
-  "isHeadQuarter": true
+  "schoolName": "Engineering School"
 }
 ```
 
-#### Job Positions
+#### Careers
 
 ##### *POST*
 
 ```
-http://$host/$service-name/job-positions
+http://$host/$service-name/career
 ```
 
 *Body:*
 
 ```json
 {
-  "positionName": "Software Developer"
+  "schoolId": 1,
+  "career": "Computer Science"
 }
 ```
 
@@ -119,7 +114,7 @@ http://$host/$service-name/job-positions
 ###### *GET* All registers
 
 ```
-http://$host/$service-name/job-positions
+http://$host/$service-name/career
 ```
 
 *Response:*
@@ -128,166 +123,47 @@ http://$host/$service-name/job-positions
 [
     {
       "id": 1,
-      "positionName": "Software Developer"
+      "schoolId": 1,
+      "career": "Computer Science"
     },
     {
       "id": 2,
-      "positionName": "Office Manager"
+      "schoolId": 2,
+      "career": "Medicine"
     }
 ]
 ```
 
-###### *GET* Job Positions by ID
+###### *GET* Career by ID
 
 ```
-http://$host/$service-name/job-positions/$id
+http://$host/$service-name/career/$id
 ```
 
 *Response:*
 
 ```json
 {
-  "id": 1,
-  "positionName": "Software Developer"
+  "schoolId": 1,
+  "career": "Computer Science"
 }
 ```
 
-#### Salaries
+#### Persons
 
 ##### *POST*
 
 ```
-http://$host/$service-name/salaries
+http://$host/$service-name/person
 ```
 
 *Body:*
 
 ```json
 {
-  "jobPositionId": 1,
-  "salary": 3500.00
-}
-```
-
-##### *GET*
-
-###### *GET* All registers
-
-```
-http://$host/$service-name/salaries
-```
-
-*Response:*
-
-```json
-[
-    {
-      "id": 1,
-      "jobPositionId": 1,
-      "salary": 3500.00
-    },
-    {
-      "id": 2,
-      "jobPositionId": 2,
-      "salary": 2850.00
-    }
-]
-```
-
-###### *GET* Salary by ID
-
-```
-http://$host/$service-name/salaries/$id
-```
-
-*Response:*
-
-```json
-{
-  "id": 1,
-  "jobPositionId": 1,
-  "salary": 3500.00
-}
-```
-
-#### Salary Parameters
-
-##### *POST*
-
-```
-http://$host/$service-name/salary-parameters
-```
-
-*Body:*
-
-```json
-{
-  "salaryId": 1,
-  "branchOfficeId": 1,
-  "relationToHeadQuarter": 1
-}
-```
-
-##### *GET*
-
-###### *GET* All registers
-
-```
-http://$host/$service-name/salary-parameters
-```
-
-*Response:*
-
-```json
-[
-    {
-      "id": 1,
-      "salaryId": 1,
-      "branchOfficeId": 1,
-      "relationToHeadQuarter": 1
-    },
-    {
-      "id": 2,
-      "salaryId": 3,
-      "branchOfficeId": 2,
-      "relationToHeadQuarter": 0.87
-    }
-]
-```
-
-###### *GET* Salary Parameter by ID
-
-```
-http://$host/$service-name/salary-parameters/$id
-```
-
-*Response:*
-
-```json
-{
-  "id": 1,
-  "salaryId": 1,
-  "branchOfficeId": 1,
-  "relationToHeadQuarter": 1
-}
-```
-
-#### Employees
-
-##### *POST*
-
-```
-http://$host/$service-name/employees
-```
-
-*Body:*
-
-```json
-{
+  "dni": "987654258-7A",
   "name": "Daniel",
-  "lastName": "Córdova",
-  "jobPositionId": 1,
-  "branchOfficeId": 1
+  "lastName": "Córdova"
 }
 ```
 
@@ -296,7 +172,7 @@ http://$host/$service-name/employees
 ###### *GET* All registers
 
 ```
-http://$host/$service-name/employees
+http://$host/$service-name/person
 ```
 
 *Response:*
@@ -305,25 +181,23 @@ http://$host/$service-name/employees
 [
     {
       "id": 1,
+      "dni": "987654258-7A",
       "name": "Daniel",
-      "lastName": "Córdova",
-      "jobPositionId": 1,
-      "branchOfficeId": 1
+      "lastName": "Córdova"
     },
     {
-      "id": 1,
+      "id": 2,
+      "dni": "8887415512-2S",
       "name": "Sophia",
-      "lastName": "Svenskaya",
-      "jobPositionId": 2,
-      "branchOfficeId": 3
+      "lastName": "Svenskaya"
     }
 ]
 ```
 
-###### *GET* Employees by ID
+###### *GET* Person by ID
 
 ```
-http://$host/$service-name/employees/$id
+http://$host/$service-name/person/$id
 ```
 
 *Response:*
@@ -331,9 +205,74 @@ http://$host/$service-name/employees/$id
 ```json
 {
   "id": 1,
+  "dni": "987654258-7A",
   "name": "Daniel",
-  "lastName": "Córdova",
-  "jobPositionId": 1,
-  "branchOfficeId": 1
+  "lastName": "Córdova"
+}
+```
+
+#### Students
+
+##### *POST*
+
+```
+http://$host/$service-name/student
+```
+
+*Body:*
+
+```json
+{
+  "schoolId": 1,
+  "careerId": 1,
+  "name": "Daniel",
+  "lastName": "Córdova"
+}
+```
+
+##### *GET*
+
+###### *GET* All registers
+
+```
+http://$host/$service-name/student
+```
+
+*Response:*
+
+```json
+[
+    {
+      "id": 1,
+      "schoolId": 1,
+      "careerId": 1,
+      "name": "Daniel",
+      "lastName": "Córdova"
+    },
+    {
+      "id": 2,
+      "schoolId": 1,
+      "careerId": 1,
+      "name": "Sophia",
+      "lastName": "Svenskaya"
+    }
+]
+```
+
+###### *GET* Student by ID
+
+```
+http://$host/$service-name/student/$id
+```
+
+*Response:*
+
+```json
+{
+  "id": 1,
+  "schoolId": 1,
+  "careerId": 1,
+  "name": "Daniel",
+  "lastName": "Córdova"
 }
 ```
