@@ -225,8 +225,7 @@ http://$host/$service-name/student
 {
   "schoolId": 1,
   "careerId": 1,
-  "name": "Daniel",
-  "lastName": "Córdova"
+  "personId": 1
 }
 ```
 

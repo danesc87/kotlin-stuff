@@ -1,6 +1,9 @@
 micronaut:
-    application:
-        name: micronaut-sqlite-crud
+  application:
+    name: micronaut-sqlite-crud
+  server:
+    port: 8080
 
-    server:
-        port: 8080
+belle:
+  name: crud.db
+  path: /
