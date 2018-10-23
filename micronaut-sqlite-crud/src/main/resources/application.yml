@@ -4,7 +4,3 @@ micronaut:
   server:
     port: 8080
     context-path: /msc-service
-
-belle:
-  name: crud.db
-  path: /

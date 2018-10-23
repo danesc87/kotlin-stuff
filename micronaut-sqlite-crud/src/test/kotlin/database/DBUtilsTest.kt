@@ -23,8 +23,10 @@ class DBUtilsTest {
 
     @Test
     fun shouldCreateANewDBOrConnection(){
+        dbUtils.initOrCreateDB()
+        val ormInstance = dbUtils.pultusORM!!
         Assert.assertEquals(
-                dbUtils.initOrCreateDB().to(DEFAULT_BUFFER_SIZE).second,
+                ormInstance.to(DEFAULT_BUFFER_SIZE).second,
                 testORM.to(DEFAULT_BUFFER_SIZE).second
         )
     }
