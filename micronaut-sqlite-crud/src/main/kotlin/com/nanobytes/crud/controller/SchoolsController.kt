@@ -13,7 +13,6 @@ class SchoolsController {
 
     @Post("/")
     fun postSchool() {
-
     }
 
     @Get("/")
