@@ -8,7 +8,7 @@ import io.micronaut.http.annotation.Post
  * Controller for person endpoints
  * @author Daniel Córdova A.
  */
-@Controller("/person")
+@Controller("\${micronaut.server.context-path}/person")
 class PersonController {
 
     @Post("/")
