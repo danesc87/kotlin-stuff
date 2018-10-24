@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: micronaut-sqlite-crud
+  server:
+    port: 8080
+    context-path: /msc-service
