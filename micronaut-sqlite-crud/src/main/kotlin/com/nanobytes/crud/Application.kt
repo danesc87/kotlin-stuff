@@ -11,7 +11,7 @@ object Application {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        DBUtils.initOrCreate()
         Micronaut.run(Application::class.java, *args)
-        DBUtils.initOrCreateDB()
     }
 }

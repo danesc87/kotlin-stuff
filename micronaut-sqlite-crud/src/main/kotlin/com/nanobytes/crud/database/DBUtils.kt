@@ -1,20 +1,19 @@
 package com.nanobytes.crud.database
 
-import io.micronaut.core.annotation.Internal
 import ninja.sakib.pultusorm.core.PultusORM
 
 /**
  * Singleton that has some DataBase stuff
  */
-@Internal
 object DBUtils {
 
-    var pultusORM: PultusORM? = null
+    lateinit var pultusORM: PultusORM
 
-    fun initOrCreateDB() {
+    fun initOrCreate() {
         pultusORM = PultusORM(
                 "mscDB.db",
                 System.getProperty("user.dir")
         )
     }
+
 }
