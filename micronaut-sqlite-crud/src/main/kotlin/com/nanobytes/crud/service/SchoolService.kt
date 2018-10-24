@@ -11,7 +11,14 @@ object SchoolService {
 
     private val pultusORM: PultusORM = DBUtils.pultusORM
 
-    fun saveNewPerson(school: School) {
-        pultusORM.save(school)
+    fun saveNewSchool(school: School): Boolean {
+        return pultusORM.save(school)
+    }
+
+    fun getAllSchools(): MutableList<School> {
+        val dbResult: MutableList<Any> = pultusORM.find(School())
+        val schoolList: MutableList<School> = mutableListOf()
+        dbResult.forEach { schoolList.add(it as School) }
+        return schoolList
     }
 }
