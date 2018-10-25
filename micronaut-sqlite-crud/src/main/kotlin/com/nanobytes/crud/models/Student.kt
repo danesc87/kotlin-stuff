@@ -6,6 +6,7 @@ import ninja.sakib.pultusorm.annotations.PrimaryKey
 
 /**
  * Model for Student object
+ * @author Daniel Córdova A.
  */
 class Student {
 

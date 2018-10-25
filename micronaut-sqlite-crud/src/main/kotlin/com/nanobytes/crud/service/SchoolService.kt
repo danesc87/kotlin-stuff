@@ -3,9 +3,11 @@ package com.nanobytes.crud.service
 import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.School
 import ninja.sakib.pultusorm.core.PultusORM
+import ninja.sakib.pultusorm.core.PultusORMCondition
 
 /**
  * Singleton that has all functions for School object
+ * @author Daniel Córdova A.
  */
 object SchoolService {
 
@@ -20,5 +22,14 @@ object SchoolService {
         val schoolList: MutableList<School> = mutableListOf()
         dbResult.forEach { schoolList.add(it as School) }
         return schoolList
+    }
+
+    fun getSchoolById(id: Int): School {
+        val schoolCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+        return pultusORM
+                .find(
+                        School(),
+                        schoolCondition
+                )[0] as School
     }
 }

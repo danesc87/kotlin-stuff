@@ -6,12 +6,13 @@ import java.lang.Exception
 
 /**
  * Singleton that has some utilities to make UnitTests easier
+ * @author Daniel Córdova A.
  */
 object TestUtilities {
 
     private val LOGGER: Logger = LoggerFactory.getLogger(TestUtilities::class.java)
     private val dbPath: String = System.getProperty("user.dir")
-    private const val dbName: String = "mscDB.db"
+    private const val dbName: String = "testDB.db"
     lateinit var testORM: PultusORM
 
     fun initTestDB() {

@@ -2,6 +2,7 @@ package com.nanobytes.crud.controller
 
 import com.nanobytes.crud.models.School
 import com.nanobytes.crud.service.SchoolService
+import io.micronaut.context.annotation.Parameter
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
@@ -33,7 +34,7 @@ class SchoolsController {
     }
 
     @Get("/{id}")
-    fun getSchoolById() {
-
+    fun getSchoolById(id: Int): Single<School> {
+        return Single.just(SchoolService.getSchoolById(id))
     }
 }

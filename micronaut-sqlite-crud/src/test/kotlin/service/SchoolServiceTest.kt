@@ -1,6 +1,7 @@
 package service
 
 import TestUtilities
+import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.School
 import com.nanobytes.crud.service.SchoolService
 import ninja.sakib.pultusorm.core.PultusORM
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test
 
 /**
  * Class that test if School Service works properly
+ * @author Daniel Córdova A.
  */
 class SchoolServiceTest {
 
@@ -23,8 +25,8 @@ class SchoolServiceTest {
         @BeforeAll
         @JvmStatic
         fun setUp() {
-            TestUtilities.initTestDB()
-            testORM = TestUtilities.testORM
+            DBUtils.initOrCreate("testDB.db", System.getProperty("user.dir"))
+            testORM = DBUtils.pultusORM
             testSchool.schoolName = "Engineering School"
             testORM.save(testSchool)
         }
@@ -35,8 +37,6 @@ class SchoolServiceTest {
             TestUtilities.deleteDBFile()
         }
     }
-
-
 
     @Test
     fun shouldReturnTrueWhileSaveNewSchool() {
@@ -58,5 +58,14 @@ class SchoolServiceTest {
         )
 
         Assertions.assertEquals(expected.size, actual.size)
+    }
+
+    @Test
+    fun shouldReturnASchool() {
+        val expectedSchoolName: String = testSchool.schoolName
+        val school: School = schoolService.getSchoolById(1)
+        val actualSchoolName: String = school.schoolName
+
+        Assertions.assertEquals(expectedSchoolName, actualSchoolName)
     }
 }

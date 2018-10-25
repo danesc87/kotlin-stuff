@@ -7,6 +7,7 @@ import ninja.sakib.pultusorm.annotations.Unique
 
 /**
  * Model for Person object
+ * @author Daniel Córdova A.
  */
 class Person {
 
