@@ -1,5 +1,7 @@
 package com.nanobytes.crud.controller
 
+import com.nanobytes.crud.models.Person
+import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
@@ -12,7 +14,7 @@ import io.micronaut.http.annotation.Post
 class PersonController {
 
     @Post("/")
-    fun postPerson() {
+    fun postPerson(@Body person: Person) {
 
     }
 

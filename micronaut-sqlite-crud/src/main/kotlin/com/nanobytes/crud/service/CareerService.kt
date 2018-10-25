@@ -3,7 +3,6 @@ package com.nanobytes.crud.service
 import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.Career
 import ninja.sakib.pultusorm.core.PultusORM
-import java.lang.IndexOutOfBoundsException
 
 /**
  * Class that has all functions for Career object
