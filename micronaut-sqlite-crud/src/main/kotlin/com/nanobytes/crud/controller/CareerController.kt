@@ -22,7 +22,7 @@ class CareerController {
     }
 
     @Get("/{id}")
-    fun getCareerById() {
+    fun getCareerById(id: Int) {
 
     }
 }

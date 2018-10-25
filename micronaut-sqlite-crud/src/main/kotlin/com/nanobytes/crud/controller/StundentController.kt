@@ -22,7 +22,7 @@ class StundentController {
     }
 
     @Get("/{id}")
-    fun getStudentById() {
+    fun getStudentById(id: Int) {
 
     }
 }

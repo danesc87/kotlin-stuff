@@ -22,7 +22,7 @@ class PersonController {
     }
 
     @Get("/{id}")
-    fun getPersonById() {
+    fun getPersonById(id: Int) {
 
     }
 }
