@@ -4,6 +4,7 @@ import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.School
 import ninja.sakib.pultusorm.core.PultusORM
 import ninja.sakib.pultusorm.core.PultusORMCondition
+import java.lang.IndexOutOfBoundsException
 
 /**
  * Singleton that has all functions for School object
@@ -24,6 +25,7 @@ object SchoolService {
         return schoolList
     }
 
+    @Throws(IndexOutOfBoundsException::class)
     fun getSchoolById(id: Int): School {
         val schoolCondition: PultusORMCondition = DBUtils.buildConditionById(id)
         return pultusORM
