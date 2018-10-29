@@ -40,4 +40,17 @@ class PersonServiceTest {
         // and was saved on setUp() function
         Assertions.assertFalse(result)
     }
+
+    @Test
+    fun shouldReturnAPersonList() {
+        val expected: List<Person> = listOf(testPerson)
+        var actual: MutableList<Person> = personService.getAllPersons()
+
+        Assertions.assertEquals(
+                expected[0].dni,
+                actual[0].dni
+        )
+
+        Assertions.assertEquals(expected.size, actual.size)
+    }
 }
