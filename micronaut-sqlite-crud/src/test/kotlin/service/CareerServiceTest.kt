@@ -52,7 +52,7 @@ class CareerServiceTest {
     }
 
     @Test
-    fun shouldReturnAListWithSchoolNames() {
+    fun shouldReturnAListWithCareerNames() {
         val expected: List<Career> = listOf(testCareer)
         var actual: MutableList<Career> = careerService.getAllCareers()
 
@@ -62,5 +62,14 @@ class CareerServiceTest {
         )
 
         Assertions.assertEquals(expected.size, actual.size)
+    }
+
+    @Test
+    fun shouldReturnOneCareer() {
+        val expectedCareerName: String = testCareer.career
+        val career: Career = careerService.getCareerById(1)
+        val actualCareerName: String = career.career
+
+        Assertions.assertEquals(expectedCareerName, actualCareerName)
     }
 }
