@@ -31,7 +31,11 @@ class CareerController {
     }
 
     @Get("/{id}")
-    fun getCareerById(id: Int) {
-
+    fun getCareerById(id: Int): HttpResponse<Career> {
+        return try {
+            HttpResponse.ok(CareerService.getCareerById(id))
+        } catch (e: IndexOutOfBoundsException) {
+            HttpResponse.notFound()
+        }
     }
 }
