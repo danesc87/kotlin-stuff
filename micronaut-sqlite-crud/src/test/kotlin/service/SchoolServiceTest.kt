@@ -45,8 +45,8 @@ class SchoolServiceTest {
         var actual: MutableList<School> = schoolService.getAllSchools()
 
         Assertions.assertEquals(
-                expected.get(0).schoolName,
-                actual.get(0).schoolName
+                expected[0].schoolName,
+                actual[0].schoolName
         )
 
         Assertions.assertEquals(expected.size, actual.size)
