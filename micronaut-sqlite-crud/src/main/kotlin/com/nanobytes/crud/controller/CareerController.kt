@@ -26,8 +26,8 @@ class CareerController {
     }
 
     @Get("/")
-    fun getAllCareers() {
-
+    fun getAllCareers(): HttpResponse<MutableList<Career>> {
+        return HttpResponse.ok(CareerService.getAllCareers())
     }
 
     @Get("/{id}")
