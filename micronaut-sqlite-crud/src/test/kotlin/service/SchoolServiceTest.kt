@@ -1,11 +1,9 @@
 package service
 
-import TestUtilities
 import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.School
 import com.nanobytes.crud.service.SchoolService
 import ninja.sakib.pultusorm.core.PultusORM
-import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -29,12 +27,6 @@ class SchoolServiceTest {
             testORM = DBUtils.pultusORM
             testSchool.schoolName = "Engineering School"
             testORM.save(testSchool)
-        }
-
-        @AfterAll
-        @JvmStatic
-        fun afterTest() {
-            TestUtilities.deleteDBFile()
         }
     }
 
