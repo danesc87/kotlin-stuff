@@ -21,4 +21,11 @@ object CareerService {
             false
         }
     }
+
+    fun getAllCareers(): MutableList<Career> {
+        val dbResult: MutableList<Any> = pultusORM.find(Career())
+        val careerList: MutableList<Career> = mutableListOf()
+        dbResult.forEach { careerList.add(it as Career) }
+        return careerList
+    }
 }

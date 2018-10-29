@@ -50,4 +50,17 @@ class CareerServiceTest {
         // Save operation must be false because no School Name was previously saved
         Assertions.assertFalse(result)
     }
+
+    @Test
+    fun shouldReturnAListWithSchoolNames() {
+        val expected: List<Career> = listOf(testCareer)
+        var actual: MutableList<Career> = careerService.getAllCareers()
+
+        Assertions.assertEquals(
+                expected[0].career,
+                actual[0].career
+        )
+
+        Assertions.assertEquals(expected.size, actual.size)
+    }
 }
