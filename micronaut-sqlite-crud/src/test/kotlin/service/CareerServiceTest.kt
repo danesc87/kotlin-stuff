@@ -72,4 +72,9 @@ class CareerServiceTest {
 
         Assertions.assertEquals(expectedCareerName, actualCareerName)
     }
+
+    @Test
+    fun throwAnExceptionIfDoesNotFoundACareer() {
+        Assertions.assertThrows(IndexOutOfBoundsException::class.java) { careerService.getCareerById(5) }
+    }
 }

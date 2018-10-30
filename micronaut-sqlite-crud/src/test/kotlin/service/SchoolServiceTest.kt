@@ -60,4 +60,9 @@ class SchoolServiceTest {
 
         Assertions.assertEquals(expectedSchoolName, actualSchoolName)
     }
+
+    @Test
+    fun throwAnExceptionIfDoesNotFoundAStudent() {
+        Assertions.assertThrows(IndexOutOfBoundsException::class.java) { schoolService.getSchoolById(5) }
+    }
 }
