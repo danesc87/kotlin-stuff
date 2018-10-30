@@ -1,0 +1,142 @@
+group 'nanobytes'
+version "${version != 'unspecified' ? version : ''}"
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'com.palantir.docker'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url 'https://jcenter.bintray.com'
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+// Version of dependencies
+ext {
+    kotlin_version = '1.2.51'
+    micronaut_version = '1.0.0.RC3'
+    logback_version = '1.2.3'
+    swagger_version = '2.8.0'
+    junit_version = '4.12'
+    junit5_version = '5.1.0'
+    json_simple_version = '1.1'
+    belle_orm_version = 'v1.8'
+}
+
+buildscript {
+
+    ext{
+        kotlin_version = '1.2.51'
+        gradle_docker_version = '0.19.2'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:$gradle_docker_version"
+    }
+}
+
+dependencies {
+    annotationProcessor group: 'io.micronaut', name: 'micronaut-inject-java'
+    annotationProcessor group: 'io.micronaut', name: 'micronaut-validation'
+
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: "$kotlin_version"
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: "$kotlin_version"
+    compile group: 'io.micronaut', name: 'micronaut-http-client', version: "$micronaut_version"
+    compile group: 'io.micronaut', name: 'micronaut-http-server-netty', version: "$micronaut_version"
+    compile group: 'io.micronaut', name: 'micronaut-runtime', version: "$micronaut_version"
+    compile group: 'ninja.sakib', name: 'BelleORM' , version: "$belle_orm_version"
+
+    kapt group: 'io.micronaut', name: 'micronaut-inject-java', version: "$micronaut_version"
+
+    runtime group: 'ch.qos.logback', name:'logback-classic', version:"$logback_version"
+
+    kaptTest group: 'io.micronaut', name: 'micronaut-inject-java', version: "$micronaut_version"
+//    testCompile group: 'junit', name: 'junit', version: "$junit_version"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "$junit5_version"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "$junit5_version"
+}
+
+mainClassName = "com.nanobytes.crud.Application"
+
+jar {
+    baseName = "micronaut-sqlite-crud"
+    archiveName = "$baseName.$extension"
+
+    manifest {
+        attributes(
+                'Implementation-Title': "$baseName.$extension",
+                'Implementation-Version': version,
+                'Tag-Version' : 'git describe --tags'.execute().text.trim(),
+                'Build-Time' : new java.text.SimpleDateFormat().format(new Date()))
+        if (!configurations.compile.isEmpty()) {
+            attributes(
+                    'Main-Class': 'com.nanobytes.restservice.Application',
+                    'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '))
+        }
+    }
+}
+
+task fatJar(type: Jar)  {
+    baseName = "micronaut-rest-service"
+    archiveName = "$baseName"+"-fat"+".$extension"
+
+    manifest {
+        attributes(
+                'Implementation-Title': "$baseName.$extension",
+                'Implementation-Version': version,
+                'Tag-Version' : 'git describe --tags'.execute().text.trim(),
+                'Build-Time' : new java.text.SimpleDateFormat().format(new Date()))
+        if (!configurations.compile.isEmpty()) {
+            attributes(
+                    'Main-Class': 'com.nanobytes.restservice.Application',
+                    'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '))
+        }
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
+
+docker {
+    name "${project.group}/${jar.baseName}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}
