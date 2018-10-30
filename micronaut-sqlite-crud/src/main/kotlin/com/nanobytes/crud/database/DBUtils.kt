@@ -1,20 +1,31 @@
 package com.nanobytes.crud.database
 
-import io.micronaut.core.annotation.Internal
 import ninja.sakib.pultusorm.core.PultusORM
+import ninja.sakib.pultusorm.core.PultusORMCondition
 
 /**
  * Singleton that has some DataBase stuff
+ * @author Daniel Córdova A.
  */
-@Internal
 object DBUtils {
 
-    var pultusORM: PultusORM? = null
+    lateinit var pultusORM: PultusORM
 
-    fun initOrCreateDB() {
-        pultusORM = PultusORM(
-                "mscDB.db",
-                System.getProperty("user.dir")
-        )
+    private const val dbName: String = "mscDB.db"
+    private val dbPath: String = System.getProperty("user.dir")
+
+    fun initOrCreate() {
+        initOrCreate(dbName, dbPath)
+    }
+
+    fun initOrCreate(dbName: String, dbPath: String) {
+        pultusORM = PultusORM(dbName, dbPath)
+    }
+
+    fun buildConditionById(id: Int): PultusORMCondition {
+        return PultusORMCondition
+                .Builder()
+                .eq("id", id)
+                .build()
     }
 }

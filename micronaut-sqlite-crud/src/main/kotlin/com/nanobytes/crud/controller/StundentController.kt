@@ -1,5 +1,9 @@
 package com.nanobytes.crud.controller
 
+import com.nanobytes.crud.models.Student
+import com.nanobytes.crud.service.StudentService
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
@@ -12,17 +16,26 @@ import io.micronaut.http.annotation.Post
 class StundentController {
 
     @Post("/")
-    fun postStudent() {
-
+    fun postStudent(@Body student: Student): HttpResponse<Student> {
+        val saved: Boolean = StudentService.saveNewStudent(student)
+        return if (saved) {
+            HttpResponse.created(student)
+        } else {
+            HttpResponse.badRequest()
+        }
     }
 
     @Get("/")
-    fun getAllStudents() {
-
+    fun getAllStudents(): HttpResponse<MutableList<Student>> {
+        return HttpResponse.ok(StudentService.getAllStudents())
     }
 
     @Get("/{id}")
-    fun getStudentById() {
-
+    fun getStudentById(id: Int): HttpResponse<Student> {
+        return try {
+            HttpResponse.ok(StudentService.getStudentById(id))
+        } catch (e: IndexOutOfBoundsException) {
+            HttpResponse.notFound()
+        }
     }
 }

@@ -245,15 +245,13 @@ http://$host/$service-name/student
       "id": 1,
       "schoolId": 1,
       "careerId": 1,
-      "name": "Daniel",
-      "lastName": "Córdova"
+      "personId": 1
     },
     {
       "id": 2,
       "schoolId": 1,
       "careerId": 1,
-      "name": "Sophia",
-      "lastName": "Svenskaya"
+      "personId": 2
     }
 ]
 ```
@@ -271,7 +269,6 @@ http://$host/$service-name/student/$id
   "id": 1,
   "schoolId": 1,
   "careerId": 1,
-  "name": "Daniel",
-  "lastName": "Córdova"
+  "personId": 1
 }
 ```
