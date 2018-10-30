@@ -26,12 +26,16 @@ class PersonController {
     }
 
     @Get("/")
-    fun getAllPersons() {
-
+    fun getAllPersons(): HttpResponse<MutableList<Person>> {
+        return HttpResponse.ok(PersonService.getAllPersons())
     }
 
     @Get("/{id}")
-    fun getPersonById(id: Int) {
-
+    fun getPersonById(id: Int): HttpResponse<Person> {
+        return try {
+            HttpResponse.ok(PersonService.getPersonById(id))
+        } catch (e: IndexOutOfBoundsException) {
+            HttpResponse.notFound()
+        }
     }
 }
