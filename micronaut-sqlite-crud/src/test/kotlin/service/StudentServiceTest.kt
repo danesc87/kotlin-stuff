@@ -93,4 +93,15 @@ class StudentServiceTest {
 
         Assertions.assertEquals(expected.size, actual.size)
     }
+
+    @Test
+    fun shouldReturnOneStudent() {
+        val expectedStudent: Student = testStudent
+        val student: Student = studentService.getStudentById(1)
+        val actualStudent: Student = student
+
+        Assertions.assertEquals(expectedStudent.schoolId, actualStudent.schoolId)
+        Assertions.assertEquals(expectedStudent.careerId, actualStudent.careerId)
+        Assertions.assertEquals(expectedStudent.personId, actualStudent.personId)
+    }
 }
