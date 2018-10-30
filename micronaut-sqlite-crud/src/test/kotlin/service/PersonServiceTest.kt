@@ -53,4 +53,13 @@ class PersonServiceTest {
 
         Assertions.assertEquals(expected.size, actual.size)
     }
+
+    @Test
+    fun shouldReturnAPerson() {
+        val expectedDNI: String = testPerson.dni
+        val person: Person = personService.getPersonById(1)
+        val actualDNI: String = person.dni
+
+        Assertions.assertEquals(expectedDNI, actualDNI)
+    }
 }
