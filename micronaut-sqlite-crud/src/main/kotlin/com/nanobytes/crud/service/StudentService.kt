@@ -22,4 +22,11 @@ object StudentService {
             false
         }
     }
+
+    fun getAllStudents(): MutableList<Student> {
+        val dbResult: MutableList<Any> = pultusORM.find(Student())
+        val studentList: MutableList<Student> = mutableListOf()
+        dbResult.forEach { studentList.add(it as Student) }
+        return studentList
+    }
 }

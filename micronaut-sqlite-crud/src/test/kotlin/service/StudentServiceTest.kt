@@ -80,4 +80,17 @@ class StudentServiceTest {
         // Save operation must be false because no Person was previously saved
         Assertions.assertFalse(result)
     }
+
+    @Test
+    fun shouldReturnAListWithStudents() {
+        val expected: List<Student> = listOf(testStudent)
+        var actual: MutableList<Student> = studentService.getAllStudents()
+
+        Assertions.assertEquals(
+                expected[0].schoolId,
+                actual[0].schoolId
+        )
+
+        Assertions.assertEquals(expected.size, actual.size)
+    }
 }
