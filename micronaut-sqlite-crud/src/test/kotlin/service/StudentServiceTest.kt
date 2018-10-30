@@ -104,4 +104,9 @@ class StudentServiceTest {
         Assertions.assertEquals(expectedStudent.careerId, actualStudent.careerId)
         Assertions.assertEquals(expectedStudent.personId, actualStudent.personId)
     }
+
+    @Test
+    fun throwAnExceptionIfDoesNotFoundAStudent() {
+        Assertions.assertThrows(IndexOutOfBoundsException::class.java) { studentService.getStudentById(5) }
+    }
 }
