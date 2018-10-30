@@ -26,12 +26,16 @@ class StundentController {
     }
 
     @Get("/")
-    fun getAllStudents() {
-
+    fun getAllStudents(): HttpResponse<MutableList<Student>> {
+        return HttpResponse.ok(StudentService.getAllStudents())
     }
 
     @Get("/{id}")
-    fun getStudentById(id: Int) {
-
+    fun getStudentById(id: Int): HttpResponse<Student> {
+        return try {
+            HttpResponse.ok(StudentService.getStudentById(id))
+        } catch (e: IndexOutOfBoundsException) {
+            HttpResponse.notFound()
+        }
     }
 }
