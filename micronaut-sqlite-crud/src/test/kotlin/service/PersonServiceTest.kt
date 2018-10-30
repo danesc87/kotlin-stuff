@@ -62,4 +62,9 @@ class PersonServiceTest {
 
         Assertions.assertEquals(expectedDNI, actualDNI)
     }
+
+    @Test
+    fun throwAnExceptionIfDoesNotFoundAPerson() {
+        Assertions.assertThrows(IndexOutOfBoundsException::class.java) { personService.getPersonById(5) }
+    }
 }
