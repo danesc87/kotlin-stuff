@@ -18,6 +18,9 @@ class StudentServiceTest {
 
         private lateinit var testORM: PultusORM
         private val testStudent: Student = Student()
+        private val noSchoolIdTestStudent: Student = Student()
+        private val noCareerIdTestStudent: Student = Student()
+        private val noPersonIdTestStudent: Student = Student()
         private val studentService: StudentService = StudentService
 
         @BeforeAll
@@ -28,6 +31,19 @@ class StudentServiceTest {
             testStudent.schoolId = 1
             testStudent.careerId = 1
             testStudent.personId = 1
+
+            noSchoolIdTestStudent.schoolId = 5
+            noSchoolIdTestStudent.careerId = 1
+            noSchoolIdTestStudent.personId = 1
+
+            noCareerIdTestStudent.schoolId = 1
+            noCareerIdTestStudent.careerId = 5
+            noCareerIdTestStudent.personId = 1
+
+            noPersonIdTestStudent.schoolId = 1
+            noPersonIdTestStudent.careerId = 1
+            noPersonIdTestStudent.personId = 5
+
             testORM.save(testStudent)
         }
     }
@@ -38,6 +54,30 @@ class StudentServiceTest {
 
         // Save operation must be false because PersonId is Unique
         // and was saved on setUp() function
+        Assertions.assertFalse(result)
+    }
+
+    @Test
+    fun shouldReturnFalseIfASchoolNotExist() {
+        val result: Boolean = studentService.saveNewStudent(noSchoolIdTestStudent)
+
+        // Save operation must be false because no School was previously saved
+        Assertions.assertFalse(result)
+    }
+
+    @Test
+    fun shouldReturnFalseIfACareerNotExist() {
+        val result: Boolean = studentService.saveNewStudent(noCareerIdTestStudent)
+
+        // Save operation must be false because no Career was previously saved
+        Assertions.assertFalse(result)
+    }
+
+    @Test
+    fun shouldReturnFalseIfAPersonNotExist() {
+        val result: Boolean = studentService.saveNewStudent(noPersonIdTestStudent)
+
+        // Save operation must be false because no Person was previously saved
         Assertions.assertFalse(result)
     }
 }

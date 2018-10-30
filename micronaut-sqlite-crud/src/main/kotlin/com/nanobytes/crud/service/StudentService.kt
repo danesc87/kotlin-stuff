@@ -16,7 +16,7 @@ object StudentService {
         return try {
             SchoolService.getSchoolById(student.schoolId)
             CareerService.getCareerById(student.careerId)
-            PersonService.getPersonById(student.careerId)
+            PersonService.getPersonById(student.personId)
             pultusORM.save(student)
         } catch (e: IndexOutOfBoundsException) {
             false
