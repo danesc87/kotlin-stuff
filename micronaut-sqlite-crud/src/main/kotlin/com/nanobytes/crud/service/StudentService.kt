@@ -43,13 +43,13 @@ object StudentService {
     }
 
     fun fullUpdate(id: Int, student: Student): Boolean {
-        val studenCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+        val studentCondition: PultusORMCondition = DBUtils.buildConditionById(id)
         val studentUpdater: PultusORMUpdater = PultusORMUpdater
                 .Builder()
                 .set("schoolId", student.schoolId)
                 .set("careerId", student.careerId)
                 .set("personId", student.personId)
-                .condition(studenCondition)
+                .condition(studentCondition)
                 .build()
         return pultusORM.update(Student(), studentUpdater)
     }
