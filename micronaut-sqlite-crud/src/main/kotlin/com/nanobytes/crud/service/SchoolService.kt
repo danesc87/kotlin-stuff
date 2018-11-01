@@ -4,6 +4,7 @@ import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.School
 import ninja.sakib.pultusorm.core.PultusORM
 import ninja.sakib.pultusorm.core.PultusORMCondition
+import ninja.sakib.pultusorm.core.PultusORMUpdater
 
 /**
  * Singleton that has all functions for School object
@@ -32,5 +33,15 @@ object SchoolService {
                         School(),
                         schoolCondition
                 )[0] as School
+    }
+
+    fun fullUpdate(id: Int, school: School): Boolean {
+        val schoolCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+        val schoolUpdater: PultusORMUpdater = PultusORMUpdater
+                .Builder()
+                .set("schoolName", school.schoolName)
+                .condition(schoolCondition)
+                .build()
+        return pultusORM.update(School(), schoolUpdater)
     }
 }
