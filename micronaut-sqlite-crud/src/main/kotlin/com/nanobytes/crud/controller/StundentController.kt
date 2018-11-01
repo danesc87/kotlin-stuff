@@ -3,10 +3,7 @@ package com.nanobytes.crud.controller
 import com.nanobytes.crud.models.Student
 import com.nanobytes.crud.service.StudentService
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 
 /**
  * Controller for student endpoints
@@ -36,6 +33,19 @@ class StundentController {
             HttpResponse.ok(StudentService.getStudentById(id))
         } catch (e: IndexOutOfBoundsException) {
             HttpResponse.notFound()
+        }
+    }
+
+    @Put("/{id}")
+    fun putStudent(
+            id: Int,
+            @Body student: Student
+    ): HttpResponse<Student> {
+        val updated: Boolean = StudentService.fullUpdate(id, student)
+        return if (updated) {
+            HttpResponse.ok(student)
+        } else {
+            HttpResponse.badRequest()
         }
     }
 }

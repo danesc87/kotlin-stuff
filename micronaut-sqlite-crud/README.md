@@ -92,6 +92,20 @@ http://$host/$service-name/school/$id
 }
 ```
 
+##### *PUT*
+
+```
+http://$host/$service-name/school/$id
+```
+
+*Body:*
+
+```json
+{
+  "schoolName": "Philosophy School"
+}
+```
+
 #### Careers
 
 ##### *POST*
@@ -144,8 +158,24 @@ http://$host/$service-name/career/$id
 
 ```json
 {
+  "id": 1,
   "schoolId": 1,
   "career": "Computer Science"
+}
+```
+
+##### *PUT*
+
+```
+http://$host/$service-name/career/$id
+```
+
+*Body:*
+
+```json
+{
+  "schoolId": 1,
+  "career": "Electric Engineer"
 }
 ```
 
@@ -211,6 +241,22 @@ http://$host/$service-name/person/$id
 }
 ```
 
+##### *PUT*
+
+```
+http://$host/$service-name/person/$id
+```
+
+*Body:*
+
+```json
+{
+  "dni": "0147896532-q1",
+  "name": "John",
+  "lastName": "Doe"
+}
+```
+
 #### Students
 
 ##### *POST*
@@ -270,5 +316,21 @@ http://$host/$service-name/student/$id
   "schoolId": 1,
   "careerId": 1,
   "personId": 1
+}
+```
+
+##### *PUT*
+
+```
+http://$host/$service-name/student/$id
+```
+
+*Body:*
+
+```json
+{
+  "schoolId": 2,
+  "careerId": 3,
+  "personId": 20
 }
 ```

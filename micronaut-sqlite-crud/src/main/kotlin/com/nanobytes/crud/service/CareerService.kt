@@ -4,6 +4,7 @@ import com.nanobytes.crud.database.DBUtils
 import com.nanobytes.crud.models.Career
 import ninja.sakib.pultusorm.core.PultusORM
 import ninja.sakib.pultusorm.core.PultusORMCondition
+import ninja.sakib.pultusorm.core.PultusORMUpdater
 
 /**
  * Class that has all functions for Career object
@@ -38,5 +39,16 @@ object CareerService {
                         Career(),
                         careerCondition
                 )[0] as Career
+    }
+
+    fun fullUpdate(id: Int, career: Career): Boolean {
+        val careerCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+        val careerUpdater: PultusORMUpdater = PultusORMUpdater
+                .Builder()
+                .set("schoolId", career.schoolId)
+                .set("career", career.career)
+                .condition(careerCondition)
+                .build()
+        return pultusORM.update(Career(), careerUpdater)
     }
 }

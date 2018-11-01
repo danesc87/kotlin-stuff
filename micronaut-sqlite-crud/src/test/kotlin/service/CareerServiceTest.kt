@@ -77,4 +77,11 @@ class CareerServiceTest {
     fun throwAnExceptionIfDoesNotFoundACareer() {
         Assertions.assertThrows(IndexOutOfBoundsException::class.java) { careerService.getCareerById(5) }
     }
+
+    @Test
+    fun shouldReturnTrueIfAFullUpdateWasSuccessfullyApplied() {
+        val result: Boolean = careerService.fullUpdate(1, testCareer)
+
+        Assertions.assertTrue(result)
+    }
 }
