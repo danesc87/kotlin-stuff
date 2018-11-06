@@ -179,6 +179,12 @@ http://$host/$service-name/career/$id
 }
 ```
 
+##### *PATCH*
+
+```
+http://$host/$service-name/career/$id?parametersToUpdate=[$parameter1,$parameter2,...]
+```
+
 #### Persons
 
 ##### *POST*
@@ -257,6 +263,12 @@ http://$host/$service-name/person/$id
 }
 ```
 
+##### *PATCH*
+
+```
+http://$host/$service-name/person/$id?parametersToUpdate=[$parameter1,$parameter2,...]
+```
+
 #### Students
 
 ##### *POST*
@@ -333,4 +345,10 @@ http://$host/$service-name/student/$id
   "careerId": 3,
   "personId": 20
 }
+```
+
+##### *PATCH*
+
+```
+http://$host/$service-name/student/$id?parametersToUpdate=[$parameter1,$parameter2,...]
 ```
