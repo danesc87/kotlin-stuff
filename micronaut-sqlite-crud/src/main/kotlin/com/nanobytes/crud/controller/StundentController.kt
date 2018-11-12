@@ -48,4 +48,17 @@ class StundentController {
             HttpResponse.badRequest()
         }
     }
+
+    @Patch("/{id}")
+    fun patchStudent(
+            id: Int,
+            @QueryValue parametersToUpdate: Any
+    ): HttpResponse<Student> {
+        val updated: Boolean = StudentService.partialUpdate(id, parametersToUpdate)
+        return if (updated) {
+            HttpResponse.ok(StudentService.getStudentById(id))
+        } else {
+            HttpResponse.badRequest()
+        }
+    }
 }
