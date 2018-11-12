@@ -5,6 +5,7 @@ import com.nanobytes.crud.models.Career
 import ninja.sakib.pultusorm.core.PultusORM
 import ninja.sakib.pultusorm.core.PultusORMCondition
 import ninja.sakib.pultusorm.core.PultusORMUpdater
+import ninja.sakib.pultusorm.exceptions.PultusORMException
 
 /**
  * Class that has all functions for Career object
@@ -52,17 +53,33 @@ object CareerService {
         return pultusORM.update(Career(), careerUpdater)
     }
 
-    fun partialUpdate(id: Int, parametersToUpdate: Map<String, String>): Boolean {
-        val careerCondition: PultusORMCondition = DBUtils.buildConditionById(id)
-        val careerUpdater: PultusORMUpdater.Builder = PultusORMUpdater
-                .Builder()
-        for (key: String in parametersToUpdate.keys) {
-            careerUpdater.set(key, parametersToUpdate[key]!!)
+    fun partialUpdate(id: Int, parametersToUpdate: Any): Boolean {
+        try {
+            val listOfParameters: MutableList<String> = mutableListOf()
+            (parametersToUpdate as Iterable<String>)
+                    .forEach { listOfParameters.addAll(
+                            it.split(","))
+                    }
+            val parametersMap: MutableMap<String, String> = mutableMapOf()
+            listOfParameters.forEach {
+                val parameter: List<String> = it.split(":")
+                parametersMap[parameter[0]] = parameter[1]
+            }
+            val careerCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+            val careerUpdater: PultusORMUpdater.Builder = PultusORMUpdater
+                    .Builder()
+            for (key: String in parametersMap.keys) {
+                careerUpdater.set(key, parametersMap[key]!!)
+            }
+            careerUpdater.condition(careerCondition).build()
+            return pultusORM.update(
+                    Career(),
+                    careerUpdater.condition(careerCondition).build()
+            )
+        } catch (e: ClassCastException) {
+            return false
+        } catch (ex: PultusORMException) {
+            return false
         }
-        careerUpdater.condition(careerCondition).build()
-        return pultusORM.update(
-                Career(),
-                careerUpdater.condition(careerCondition).build()
-        )
     }
 }

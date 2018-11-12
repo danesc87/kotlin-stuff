@@ -87,7 +87,7 @@ class CareerServiceTest {
 
     @Test
     fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
-        val result: Boolean = careerService.partialUpdate(5, mapOf("career" to "Electric Engineering"))
+        val result: Boolean = careerService.partialUpdate(5, listOf("career:Electric Engineering"))
 
         Assertions.assertTrue(result)
     }
