@@ -61,4 +61,14 @@ class StundentController {
             HttpResponse.badRequest()
         }
     }
+
+    @Delete("/{id}")
+    fun deleteStudent(id: Int): HttpResponse<Student> {
+        val deleted: Boolean = StudentService.deleteStudent(id)
+        return if (deleted) {
+            HttpResponse.ok()
+        } else {
+            HttpResponse.badRequest()
+        }
+    }
 }
