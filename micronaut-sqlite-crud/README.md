@@ -182,7 +182,8 @@ http://$host/$service-name/career/$id
 ##### *PATCH*
 
 ```
-http://$host/$service-name/career/$id?parametersToUpdate=[$parameter1,$parameter2,...]
+http://$host/$service-name/career/$id?parametersToUpdate={$parameterName1: $parameterValue1,$parameterName2: 
+$parameterValue2,...}
 ```
 
 #### Persons
@@ -266,7 +267,8 @@ http://$host/$service-name/person/$id
 ##### *PATCH*
 
 ```
-http://$host/$service-name/person/$id?parametersToUpdate=[$parameter1,$parameter2,...]
+http://$host/$service-name/person/$id?parametersToUpdate={$parameterName1: $parameterValue1,$parameterName2: 
+$parameterValue2,...}
 ```
 
 #### Students
@@ -350,5 +352,6 @@ http://$host/$service-name/student/$id
 ##### *PATCH*
 
 ```
-http://$host/$service-name/student/$id?parametersToUpdate=[$parameter1,$parameter2,...]
+http://$host/$service-name/student/$id?parametersToUpdate={$parameterName1: $parameterValue1,$parameterName2: 
+$parameterValue2,...}
 ```

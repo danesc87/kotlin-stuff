@@ -51,4 +51,18 @@ object CareerService {
                 .build()
         return pultusORM.update(Career(), careerUpdater)
     }
+
+    fun partialUpdate(id: Int, parametersToUpdate: Map<String, String>): Boolean {
+        val careerCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+        val careerUpdater: PultusORMUpdater.Builder = PultusORMUpdater
+                .Builder()
+        for (key: String in parametersToUpdate.keys) {
+            careerUpdater.set(key, parametersToUpdate[key]!!)
+        }
+        careerUpdater.condition(careerCondition).build()
+        return pultusORM.update(
+                Career(),
+                careerUpdater.condition(careerCondition).build()
+        )
+    }
 }
