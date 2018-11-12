@@ -106,14 +106,14 @@ jar {
                 'Build-Time' : new java.text.SimpleDateFormat().format(new Date()))
         if (!configurations.compile.isEmpty()) {
             attributes(
-                    'Main-Class': 'com.nanobytes.restservice.Application',
+                    'Main-Class': 'com.nanobytes.crud.Application',
                     'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '))
         }
     }
 }
 
 task fatJar(type: Jar)  {
-    baseName = "micronaut-rest-service"
+    baseName = "micronaut-sqlite-crud"
     archiveName = "$baseName"+"-fat"+".$extension"
 
     manifest {
@@ -124,7 +124,7 @@ task fatJar(type: Jar)  {
                 'Build-Time' : new java.text.SimpleDateFormat().format(new Date()))
         if (!configurations.compile.isEmpty()) {
             attributes(
-                    'Main-Class': 'com.nanobytes.restservice.Application',
+                    'Main-Class': 'com.nanobytes.crud.Application',
                     'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '))
         }
     }

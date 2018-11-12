@@ -2,15 +2,34 @@
 This project is a small *CRUD* built with [**Micronaut**](http://micronaut.io/) framework and [**BelleORM**](https://github.com/s4kibs4mi/BelleORM) as ORM for *SQLite*
 
 ## **Contents**
-* General Context
-* Compile
-* Tests
-* Run
-* Endpoints
-    * [*Schools*](#schools)
-    * [*Careers*](#careers)
-    * [*Persons*](#persons)
-    * [*Students*](#students)
+* [General Context](#general-context)
+* [Compile](#compile)
+* [Tests](#tests)
+* [Run](#run)
+* [Endpoints](#endpoints)
+    * [*Schools*](#schools)  
+	    	* [*POST*](#post)
+	    	* [*GET*](#get)
+	    	* [*PUT*](#put)
+	    	* [*DELETE*](#delete)
+    * [*Careers*](#careers)  
+		    * [*POST*](#post-1)
+	    	* [*GET*](#get-1)
+	    	* [*PUT*](#put-1)
+	    	* [*PATCH*](#patch)
+	    	* [*DELETE*](#delete-1)
+    * [*Persons*](#persons)  
+		    * [*POST*](#post-2)
+	    	* [*GET*](#get-2)
+	    	* [*PUT*](#put-2)
+	    	* [*PATCH*](#patch-1)
+	    	* [*DELETE*](#delete-2)
+    * [*Students*](#students)  
+		    * [*POST*](#post-3)
+	    	* [*GET*](#get-3)
+	    	* [*PUT*](#put-3)
+	    	* [*PATCH*](#patch-2)
+	    	* [*DELETE*](#delete-3)
 
 ## **General Context**
 A System that allow to save some university information like Schools, Careers and Students. To make it work properly 
@@ -36,9 +55,12 @@ the system must have the following instructions implemented.
 
 ## **Run**
 
+```
+./gradlew run
+```
+
 ## **Endpoints**
 
-<div id="schools"></div>
 #### Schools
 
 ##### *POST*
@@ -107,13 +129,12 @@ http://$host/$service-name/school/$id
 }
 ```
 
-###### *DELETE*
+##### *DELETE*
 
 ```
 http://$host/$service-name/school/$id
 ```
 
-<div id="careers"></div>
 #### Careers
 
 ##### *POST*
@@ -193,13 +214,12 @@ http://$host/$service-name/career/$id
 http://$host/$service-name/career/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
 ```
 
-###### *DELETE*
+##### *DELETE*
 
 ```
 http://$host/$service-name/career/$id
 ```
 
-<div id="persons"></div>
 #### Persons
 
 ##### *POST*
@@ -284,13 +304,12 @@ http://$host/$service-name/person/$id
 http://$host/$service-name/person/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
 ```
 
-###### *DELETE*
+##### *DELETE*
 
 ```
 http://$host/$service-name/person/$id
 ```
 
-<div id="students"></div>
 #### Students
 
 ##### *POST*
@@ -375,7 +394,7 @@ http://$host/$service-name/student/$id
 http://$host/$service-name/student/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
 ```
 
-###### *DELETE*
+##### *DELETE*
 
 ```
 http://$host/$service-name/student/$id
