@@ -123,4 +123,11 @@ class StudentServiceTest {
 
         Assertions.assertTrue(result)
     }
+
+    @Test
+    fun shouldReturnTrueIfAStudentWasDeleted() {
+        val result: Boolean = studentService.deleteStudent(6)
+
+        Assertions.assertTrue(result)
+    }
 }

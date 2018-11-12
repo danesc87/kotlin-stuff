@@ -49,4 +49,9 @@ object PersonService {
     fun partialUpdate(id: Int, parametersToUpdate: Any): Boolean {
         return genericPartialUpdate(id, parametersToUpdate, Person())
     }
+
+    fun deletePerson(id: Int): Boolean {
+        val schoolCondition: PultusORMCondition = buildConditionById(id)
+        return pultusORM.delete(Person(), schoolCondition)
+    }
 }
