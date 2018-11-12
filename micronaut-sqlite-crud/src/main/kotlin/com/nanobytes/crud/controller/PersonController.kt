@@ -48,4 +48,17 @@ class PersonController {
             HttpResponse.badRequest()
         }
     }
+
+    @Patch("/{id}")
+    fun patchPerson(
+            id: Int,
+            @QueryValue parametersToUpdate: Any
+    ): HttpResponse<Person> {
+        val updated: Boolean = PersonService.partialUpdate(id, parametersToUpdate)
+        return if (updated) {
+            HttpResponse.ok(PersonService.getPersonById(id))
+        } else {
+            return HttpResponse.badRequest()
+        }
+    }
 }

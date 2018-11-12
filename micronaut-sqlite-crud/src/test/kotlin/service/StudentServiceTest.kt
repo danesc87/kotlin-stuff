@@ -116,4 +116,11 @@ class StudentServiceTest {
 
         Assertions.assertTrue(result)
     }
+
+    @Test
+    fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
+        val result: Boolean = studentService.partialUpdate(5, listOf("schoolId:1, careerId:1, personId:2"))
+
+        Assertions.assertTrue(result)
+    }
 }
