@@ -7,10 +7,10 @@ This project is a small *CRUD* built with [**Micronaut**](http://micronaut.io/) 
 * Tests
 * Run
 * Endpoints
-    * *Schools*
-    * *Careers*
-    * *Persons*
-    * *Students*
+    * [*Schools*](#schools)
+    * [*Careers*](#careers)
+    * [*Persons*](#persons)
+    * [*Students*](#students)
 
 ## **General Context**
 A System that allow to save some university information like Schools, Careers and Students. To make it work properly 
@@ -38,6 +38,7 @@ the system must have the following instructions implemented.
 
 ## **Endpoints**
 
+<div id="schools"></div>
 #### Schools
 
 ##### *POST*
@@ -106,6 +107,13 @@ http://$host/$service-name/school/$id
 }
 ```
 
+###### *DELETE*
+
+```
+http://$host/$service-name/school/$id
+```
+
+<div id="careers"></div>
 #### Careers
 
 ##### *POST*
@@ -185,6 +193,13 @@ http://$host/$service-name/career/$id
 http://$host/$service-name/career/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
 ```
 
+###### *DELETE*
+
+```
+http://$host/$service-name/career/$id
+```
+
+<div id="persons"></div>
 #### Persons
 
 ##### *POST*
@@ -269,6 +284,13 @@ http://$host/$service-name/person/$id
 http://$host/$service-name/person/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
 ```
 
+###### *DELETE*
+
+```
+http://$host/$service-name/person/$id
+```
+
+<div id="students"></div>
 #### Students
 
 ##### *POST*
@@ -351,4 +373,10 @@ http://$host/$service-name/student/$id
 
 ```
 http://$host/$service-name/student/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
+```
+
+###### *DELETE*
+
+```
+http://$host/$service-name/student/$id
 ```
