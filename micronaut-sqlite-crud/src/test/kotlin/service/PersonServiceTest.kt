@@ -74,4 +74,11 @@ class PersonServiceTest {
 
         Assertions.assertTrue(result)
     }
+
+    @Test
+    fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
+        val result: Boolean = personService.partialUpdate(5, listOf("dni:0125698743-F, name:Jill, lastName:Jones"))
+
+        Assertions.assertTrue(result)
+    }
 }
