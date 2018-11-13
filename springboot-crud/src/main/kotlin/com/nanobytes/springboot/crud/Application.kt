@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 /**
- * Main class of the SprginBoot CRUD application
+ * Main class of the SpringBoot CRUD application
  * @author Daniel Córdova A.
  */
 @SpringBootApplication
