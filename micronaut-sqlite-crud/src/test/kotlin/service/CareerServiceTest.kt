@@ -91,4 +91,11 @@ class CareerServiceTest {
 
         Assertions.assertTrue(result)
     }
+
+    @Test
+    fun shouldReturnTrueIfACareerWasDeleted() {
+        val result: Boolean = careerService.deleteCareer(6)
+
+        Assertions.assertTrue(result)
+    }
 }

@@ -81,4 +81,11 @@ class PersonServiceTest {
 
         Assertions.assertTrue(result)
     }
+
+    @Test
+    fun shouldReturnTrueIfAPersonWasDeleted() {
+        val result: Boolean = personService.deletePerson(6)
+
+        Assertions.assertTrue(result)
+    }
 }

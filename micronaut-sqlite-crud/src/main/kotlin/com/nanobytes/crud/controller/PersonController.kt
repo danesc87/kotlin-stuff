@@ -61,4 +61,14 @@ class PersonController {
             return HttpResponse.badRequest()
         }
     }
+
+    @Delete("/{id}")
+    fun deletePerson(id: Int): HttpResponse<Person> {
+        val deleted: Boolean = PersonService.deletePerson(id)
+        return if (deleted) {
+            HttpResponse.ok()
+        } else {
+            HttpResponse.badRequest()
+        }
+    }
 }

@@ -61,4 +61,14 @@ class CareerController {
             HttpResponse.badRequest()
         }
     }
+
+    @Delete("/{id}")
+    fun deleteCareer(id: Int): HttpResponse<Career> {
+        val deleted: Boolean = CareerService.deleteCareer(id)
+        return if (deleted) {
+            HttpResponse.ok()
+        } else {
+            HttpResponse.badRequest()
+        }
+    }
 }
