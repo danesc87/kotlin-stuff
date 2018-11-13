@@ -55,7 +55,7 @@ To make it work properly the system must have the following instructions impleme
 ## **Run**
 
 ```
-./gradlew run
+./gradlew bootRun
 ```
 
 ## **Endpoints**
