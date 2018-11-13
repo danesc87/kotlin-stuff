@@ -2,6 +2,7 @@ group 'nanobytes'
 version "${version != 'unspecified' ? version : ''}"
 
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
@@ -78,7 +79,7 @@ dependencies {
 
 }
 
-mainClassName = 'com.nanobytes.crud.Application'
+mainClassName = 'com.nanobytes.springboot.crud.Application'
 applicationName = 'springboot-crud'
 
 jar {
