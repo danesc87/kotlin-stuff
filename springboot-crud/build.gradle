@@ -1,0 +1,121 @@
+group 'nanobytes'
+version "${version != 'unspecified' ? version : ''}"
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'com.palantir.docker'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Version of dependencies
+ext {
+    kotlin_version = '1.3.0'
+    spring_boot_version = '2.1.0.RELEASE'
+    spring_web_version = '5.1.2.RELEASE'
+    swagger_version = '2.9.2'
+    junit_version = '5.1.0'
+
+}
+
+buildscript {
+    ext{
+        kotlin_version = '1.3.0'
+        spring_boot_version = '2.1.0.RELEASE'
+        gradle_docker_version = '0.20.1'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:$gradle_docker_version"
+    }
+}
+
+dependencies {
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: "$kotlin_version"
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: "$kotlin_version"
+    compile group: 'org.springframework', name: 'spring-web', version: "$spring_web_version"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$spring_boot_version"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "$spring_boot_version"
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: "$swagger_version"
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "$swagger_version"
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "$spring_boot_version"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "$junit_version"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "$junit_version"
+
+}
+
+mainClassName = 'com.nanobytes.crud.Application'
+applicationName = 'springboot-crud'
+
+jar {
+    baseName = "$applicationName"
+    archiveName = "$baseName.$extension"
+
+    manifest {
+        attributes(
+                'Implementation-Title': "$baseName.$extension",
+                'Implementation-Version': version,
+                'Tag-Version' : 'git describe --tags'.execute().text.trim(),
+                'Build-Time' : new java.text.SimpleDateFormat().format(new Date()))
+        if (!configurations.compile.isEmpty()) {
+            attributes(
+                    'Main-Class': "$mainClassName",
+                    'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '))
+        }
+    }
+}
+
+docker {
+    name "${project.group}/${jar.baseName}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}
+
+//We need this to be able to read command line parameters, like in `./gradlew bootRun -Dfoo.bar=baz ... `
+[bootRun].each { runTask ->
+    configure(runTask) {
+        systemProperties System.properties
+    }
+}
+
+//We need this to pass a list of arguments, i.e. `./gradlew bootRun -Pargs="-h ..."`
+bootRun {
+    if (project.hasProperty('args')){
+        args = (project.args.split("\\s+") as List)
+    }
+}
+
