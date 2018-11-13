@@ -65,7 +65,10 @@ class DBUtilsTest {
 
     @Test
     fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
-        val result: Boolean = DBUtils.genericPartialUpdate(5, listOf("career:Electric Engineering"), Career())
+        val result: Boolean = DBUtils.genericPartialUpdate(
+                5,
+                "{\"career\": \"Electric Engineering\"}", Career()
+        )
 
         Assertions.assertTrue(result)
     }

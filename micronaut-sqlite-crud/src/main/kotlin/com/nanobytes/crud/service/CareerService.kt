@@ -51,8 +51,8 @@ object CareerService {
         return pultusORM.update(Career(), careerUpdater)
     }
 
-    fun partialUpdate(id: Int, parametersToUpdate: Any): Boolean {
-        return genericPartialUpdate(id, parametersToUpdate, Career())
+    fun partialUpdate(id: Int, stringPartialBody: String): Boolean {
+        return genericPartialUpdate(id, stringPartialBody, Career())
     }
 
     fun deleteCareer(id: Int): Boolean {

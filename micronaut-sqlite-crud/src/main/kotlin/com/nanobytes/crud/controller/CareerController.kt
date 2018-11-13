@@ -52,9 +52,9 @@ class CareerController {
     @Patch("/{id}")
     fun patchCareer(
             id: Int,
-            @QueryValue parametersToUpdate: Any
+            @Body stringPartialBody: String
     ): HttpResponse<Career> {
-        val updated: Boolean = CareerService.partialUpdate(id, parametersToUpdate)
+        val updated: Boolean = CareerService.partialUpdate(id, stringPartialBody)
         return if (updated) {
             HttpResponse.ok(CareerService.getCareerById(id))
         } else {

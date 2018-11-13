@@ -53,8 +53,8 @@ object StudentService {
         return pultusORM.update(Student(), studentUpdater)
     }
 
-    fun partialUpdate(id: Int, parametersToUpdate: Any): Boolean {
-        return genericPartialUpdate(id, parametersToUpdate, Student())
+    fun partialUpdate(id: Int, stringPartialBody: String): Boolean {
+        return genericPartialUpdate(id, stringPartialBody, Student())
     }
 
     fun deleteStudent(id: Int): Boolean {

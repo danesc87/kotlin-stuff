@@ -1,9 +1,13 @@
 package com.nanobytes.crud.database
 
+import com.fasterxml.jackson.core.JsonParseException
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.ObjectReader
 import ninja.sakib.pultusorm.core.PultusORM
 import ninja.sakib.pultusorm.core.PultusORMCondition
 import ninja.sakib.pultusorm.core.PultusORMUpdater
 import ninja.sakib.pultusorm.exceptions.PultusORMException
+
 
 /**
  * Singleton that has some DataBase stuff
@@ -33,32 +37,24 @@ object DBUtils {
 
     fun genericPartialUpdate(
             id: Int,
-            parametersToUpdate: Any,
+            stringPartialBody: String,
             classType: Any
     ): Boolean {
         try {
-            val listOfParameters: MutableList<String> = mutableListOf()
-            (parametersToUpdate as Iterable<String>)
-                    .forEach { listOfParameters.addAll(
-                            it.split(","))
-                    }
-            val parametersMap: MutableMap<String, String> = mutableMapOf()
-            listOfParameters.forEach {
-                val parameter: List<String> = it.split(":")
-                parametersMap[parameter[0]] = parameter[1]
-            }
-            val careerCondition: PultusORMCondition = DBUtils.buildConditionById(id)
-            val careerUpdater: PultusORMUpdater.Builder = PultusORMUpdater
+            val jsonStringReader: ObjectReader = ObjectMapper().readerFor(Map::class.java)
+            val partialBodyMap: Map<String, String> = jsonStringReader.readValue<Map<String, String>>(stringPartialBody)
+            val objectCondition: PultusORMCondition = DBUtils.buildConditionById(id)
+            val objectUpdater: PultusORMUpdater.Builder = PultusORMUpdater
                     .Builder()
-            for (key: String in parametersMap.keys) {
-                careerUpdater.set(key, parametersMap[key]!!)
+            for (key: String in partialBodyMap.keys) {
+                objectUpdater.set(key, partialBodyMap[key]!!)
             }
-            careerUpdater.condition(careerCondition).build()
+            objectUpdater.condition(objectCondition).build()
             return pultusORM.update(
                     classType,
-                    careerUpdater.condition(careerCondition).build()
+                    objectUpdater.condition(objectCondition).build()
             )
-        } catch (e: ClassCastException) {
+        } catch (e: JsonParseException) {
             return false
         } catch (ex: PultusORMException) {
             return false

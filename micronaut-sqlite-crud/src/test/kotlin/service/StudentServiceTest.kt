@@ -119,7 +119,10 @@ class StudentServiceTest {
 
     @Test
     fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
-        val result: Boolean = studentService.partialUpdate(5, listOf("schoolId:1, careerId:1, personId:2"))
+        val result: Boolean = studentService.partialUpdate(
+                5,
+                "{\"schoolId\":\"1\", \"careerId\":\"2\"}"
+        )
 
         Assertions.assertTrue(result)
     }
