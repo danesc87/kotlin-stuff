@@ -1,5 +1,5 @@
-# **SpringBoot CRUD**
-This project is a small *CRUD* built with [Springboot](https://spring.io/projects/spring-boot) and uses some *ORM* layer like [Hibernate](http://hibernate.org/orm/) to connect to the Database
+# **SpringBoot JPA CRUD**
+This project is a small *CRUD* built with [Springboot](https://spring.io/projects/spring-boot) and uses *JPA* as a layer to connect to the Database like [Hibernate](http://hibernate.org/orm/)
 
 ## **Contents**
 * [General Context](#general-context)

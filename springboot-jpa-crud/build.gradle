@@ -78,7 +78,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'springboot-crud'
+    baseName = 'springboot-jpa-crud'
     archiveName = "$baseName.$extension"
 
     manifest {
