@@ -52,9 +52,9 @@ class StundentController {
     @Patch("/{id}")
     fun patchStudent(
             id: Int,
-            @QueryValue parametersToUpdate: Any
+            @Body stringPartialBody: String
     ): HttpResponse<Student> {
-        val updated: Boolean = StudentService.partialUpdate(id, parametersToUpdate)
+        val updated: Boolean = StudentService.partialUpdate(id, stringPartialBody)
         return if (updated) {
             HttpResponse.ok(StudentService.getStudentById(id))
         } else {

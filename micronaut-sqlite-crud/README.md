@@ -211,7 +211,16 @@ http://$host/$service-name/career/$id
 ##### *PATCH*
 
 ```
-http://$host/$service-name/career/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
+http://$host/$service-name/career/$id
+```
+
+*Body:*
+
+```json
+{
+  // Whatever field or fields of Career type could be patched
+  "career": "Civil Engineer"
+}
 ```
 
 ##### *DELETE*
@@ -301,7 +310,17 @@ http://$host/$service-name/person/$id
 ##### *PATCH*
 
 ```
-http://$host/$service-name/person/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
+http://$host/$service-name/person/$id
+```
+
+*Body:*
+
+```json
+{
+  // Whatever field or fields of Person type could be patched
+  "name": "Jill",
+  "lastName": "James"
+}
 ```
 
 ##### *DELETE*
@@ -391,7 +410,16 @@ http://$host/$service-name/student/$id
 ##### *PATCH*
 
 ```
-http://$host/$service-name/student/$id?parametersToUpdate=$parameterName1:$parameterValue1,$parameterName2:$parameterValue2,...
+http://$host/$service-name/student/$id
+```
+
+*Body:*
+
+```json
+{
+  // Whatever field or fields of Student type could be patched
+  "schoolId": 2
+}
 ```
 
 ##### *DELETE*
