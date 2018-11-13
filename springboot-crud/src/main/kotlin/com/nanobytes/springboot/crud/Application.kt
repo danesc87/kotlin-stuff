@@ -2,20 +2,19 @@ package com.nanobytes.springboot.crud
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
 /**
  * Main class of the SprginBoot CRUD application
  * @author Daniel Córdova A.
  */
 @SpringBootApplication
-object Application {
-    private val LOGGER: Logger = LoggerFactory.getLogger(Application.javaClass)
+class Application
 
-    @JvmStatic
+    private val LOGGER: Logger = LoggerFactory.getLogger(Application::class.java)
+
     fun main(args: Array<String>) {
-        SpringApplication.run(Application.javaClass, *args)
+        runApplication<Application>(*args)
         LOGGER.info("Application Started!\n")
     }
-}

@@ -2,7 +2,6 @@ group 'nanobytes'
 version "${version != 'unspecified' ? version : ''}"
 
 apply plugin: 'java'
-apply plugin: 'application'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
@@ -41,7 +40,6 @@ ext {
     spring_web_version = '5.1.2.RELEASE'
     swagger_version = '2.9.2'
     junit_version = '5.1.0'
-
 }
 
 buildscript {
@@ -79,11 +77,8 @@ dependencies {
 
 }
 
-mainClassName = 'com.nanobytes.springboot.crud.Application'
-applicationName = 'springboot-crud'
-
 jar {
-    baseName = "$applicationName"
+    baseName = 'springboot-crud'
     archiveName = "$baseName.$extension"
 
     manifest {
@@ -92,11 +87,6 @@ jar {
                 'Implementation-Version': version,
                 'Tag-Version' : 'git describe --tags'.execute().text.trim(),
                 'Build-Time' : new java.text.SimpleDateFormat().format(new Date()))
-        if (!configurations.compile.isEmpty()) {
-            attributes(
-                    'Main-Class': "$mainClassName",
-                    'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '))
-        }
     }
 }
 
