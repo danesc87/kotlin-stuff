@@ -62,7 +62,21 @@ class SchoolServiceTest {
     }
 
     @Test
-    fun throwAnExceptionIfDoesNotFoundAStudent() {
+    fun throwAnExceptionIfDoesNotFoundASchool() {
         Assertions.assertThrows(IndexOutOfBoundsException::class.java) { schoolService.getSchoolById(5) }
+    }
+
+    @Test
+    fun shouldReturnTrueIfAFullUpdateWasSuccessfullyApplied() {
+        val result: Boolean = schoolService.fullUpdate(1, testSchool)
+
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun shouldReturnTrueIfASchoolWasDeleted() {
+        val result: Boolean = schoolService.deleteSchool(6)
+
+        Assertions.assertTrue(result)
     }
 }

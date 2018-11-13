@@ -67,4 +67,28 @@ class PersonServiceTest {
     fun throwAnExceptionIfDoesNotFoundAPerson() {
         Assertions.assertThrows(IndexOutOfBoundsException::class.java) { personService.getPersonById(5) }
     }
+
+    @Test
+    fun shouldReturnTrueIfAFullUpdateWasSuccessfullyApplied() {
+        val result: Boolean = personService.fullUpdate(1, testPerson)
+
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
+        val result: Boolean = personService.partialUpdate(
+                5,
+                "{\"dni\": \"0125698743-F\", \"name\": \"Jill\"}"
+        )
+
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun shouldReturnTrueIfAPersonWasDeleted() {
+        val result: Boolean = personService.deletePerson(6)
+
+        Assertions.assertTrue(result)
+    }
 }

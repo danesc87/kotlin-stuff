@@ -54,7 +54,7 @@ class CareerServiceTest {
     @Test
     fun shouldReturnAListWithCareerNames() {
         val expected: List<Career> = listOf(testCareer)
-        var actual: MutableList<Career> = careerService.getAllCareers()
+        val actual: MutableList<Career> = careerService.getAllCareers()
 
         Assertions.assertEquals(
                 expected[0].career,
@@ -76,5 +76,26 @@ class CareerServiceTest {
     @Test
     fun throwAnExceptionIfDoesNotFoundACareer() {
         Assertions.assertThrows(IndexOutOfBoundsException::class.java) { careerService.getCareerById(5) }
+    }
+
+    @Test
+    fun shouldReturnTrueIfAFullUpdateWasSuccessfullyApplied() {
+        val result: Boolean = careerService.fullUpdate(1, testCareer)
+
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
+        val result: Boolean = careerService.partialUpdate(5, "{\"career\": \"Medicine\"}")
+
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun shouldReturnTrueIfACareerWasDeleted() {
+        val result: Boolean = careerService.deleteCareer(6)
+
+        Assertions.assertTrue(result)
     }
 }

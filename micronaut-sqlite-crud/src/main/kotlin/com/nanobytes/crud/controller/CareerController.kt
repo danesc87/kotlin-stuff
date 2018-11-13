@@ -3,10 +3,7 @@ package com.nanobytes.crud.controller
 import com.nanobytes.crud.models.Career
 import com.nanobytes.crud.service.CareerService
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 
 /**
  * Controller for career endpoints
@@ -36,6 +33,42 @@ class CareerController {
             HttpResponse.ok(CareerService.getCareerById(id))
         } catch (e: IndexOutOfBoundsException) {
             HttpResponse.notFound()
+        }
+    }
+
+    @Put("/{id}")
+    fun putCarrer(
+            id: Int,
+            @Body career: Career
+    ): HttpResponse<Career> {
+        val updated: Boolean =  CareerService.fullUpdate(id, career)
+        return if (updated) {
+            HttpResponse.ok(career)
+        } else {
+            HttpResponse.badRequest()
+        }
+    }
+
+    @Patch("/{id}")
+    fun patchCareer(
+            id: Int,
+            @Body stringPartialBody: String
+    ): HttpResponse<Career> {
+        val updated: Boolean = CareerService.partialUpdate(id, stringPartialBody)
+        return if (updated) {
+            HttpResponse.ok(CareerService.getCareerById(id))
+        } else {
+            HttpResponse.badRequest()
+        }
+    }
+
+    @Delete("/{id}")
+    fun deleteCareer(id: Int): HttpResponse<Career> {
+        val deleted: Boolean = CareerService.deleteCareer(id)
+        return if (deleted) {
+            HttpResponse.ok()
+        } else {
+            HttpResponse.badRequest()
         }
     }
 }

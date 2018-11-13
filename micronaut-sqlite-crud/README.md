@@ -2,15 +2,34 @@
 This project is a small *CRUD* built with [**Micronaut**](http://micronaut.io/) framework and [**BelleORM**](https://github.com/s4kibs4mi/BelleORM) as ORM for *SQLite*
 
 ## **Contents**
-* General Context
-* Compile
-* Tests
-* Run
-* Endpoints
-    * *Schools*
-    * *Careers*
-    * *Persons*
-    * *Students*
+* [General Context](#general-context)
+* [Compile](#compile)
+* [Tests](#tests)
+* [Run](#run)
+* [Endpoints](#endpoints)
+    * [*Schools*](#schools)  
+	    	* [*POST*](#post)
+	    	* [*GET*](#get)
+	    	* [*PUT*](#put)
+	    	* [*DELETE*](#delete)
+    * [*Careers*](#careers)  
+		    * [*POST*](#post-1)
+	    	* [*GET*](#get-1)
+	    	* [*PUT*](#put-1)
+	    	* [*PATCH*](#patch)
+	    	* [*DELETE*](#delete-1)
+    * [*Persons*](#persons)  
+		    * [*POST*](#post-2)
+	    	* [*GET*](#get-2)
+	    	* [*PUT*](#put-2)
+	    	* [*PATCH*](#patch-1)
+	    	* [*DELETE*](#delete-2)
+    * [*Students*](#students)  
+		    * [*POST*](#post-3)
+	    	* [*GET*](#get-3)
+	    	* [*PUT*](#put-3)
+	    	* [*PATCH*](#patch-2)
+	    	* [*DELETE*](#delete-3)
 
 ## **General Context**
 A System that allow to save some university information like Schools, Careers and Students. To make it work properly 
@@ -35,6 +54,10 @@ the system must have the following instructions implemented.
 ```
 
 ## **Run**
+
+```
+./gradlew run
+```
 
 ## **Endpoints**
 
@@ -92,6 +115,26 @@ http://$host/$service-name/school/$id
 }
 ```
 
+##### *PUT*
+
+```
+http://$host/$service-name/school/$id
+```
+
+*Body:*
+
+```json
+{
+  "schoolName": "Philosophy School"
+}
+```
+
+##### *DELETE*
+
+```
+http://$host/$service-name/school/$id
+```
+
 #### Careers
 
 ##### *POST*
@@ -144,9 +187,46 @@ http://$host/$service-name/career/$id
 
 ```json
 {
+  "id": 1,
   "schoolId": 1,
   "career": "Computer Science"
 }
+```
+
+##### *PUT*
+
+```
+http://$host/$service-name/career/$id
+```
+
+*Body:*
+
+```json
+{
+  "schoolId": 1,
+  "career": "Electric Engineer"
+}
+```
+
+##### *PATCH*
+
+```
+http://$host/$service-name/career/$id
+```
+
+*Body:*
+
+```json
+{
+  // Whatever field or fields of Career type could be patched
+  "career": "Civil Engineer"
+}
+```
+
+##### *DELETE*
+
+```
+http://$host/$service-name/career/$id
 ```
 
 #### Persons
@@ -211,6 +291,44 @@ http://$host/$service-name/person/$id
 }
 ```
 
+##### *PUT*
+
+```
+http://$host/$service-name/person/$id
+```
+
+*Body:*
+
+```json
+{
+  "dni": "0147896532-q1",
+  "name": "John",
+  "lastName": "Doe"
+}
+```
+
+##### *PATCH*
+
+```
+http://$host/$service-name/person/$id
+```
+
+*Body:*
+
+```json
+{
+  // Whatever field or fields of Person type could be patched
+  "name": "Jill",
+  "lastName": "James"
+}
+```
+
+##### *DELETE*
+
+```
+http://$host/$service-name/person/$id
+```
+
 #### Students
 
 ##### *POST*
@@ -271,4 +389,41 @@ http://$host/$service-name/student/$id
   "careerId": 1,
   "personId": 1
 }
+```
+
+##### *PUT*
+
+```
+http://$host/$service-name/student/$id
+```
+
+*Body:*
+
+```json
+{
+  "schoolId": 2,
+  "careerId": 3,
+  "personId": 20
+}
+```
+
+##### *PATCH*
+
+```
+http://$host/$service-name/student/$id
+```
+
+*Body:*
+
+```json
+{
+  // Whatever field or fields of Student type could be patched
+  "schoolId": 2
+}
+```
+
+##### *DELETE*
+
+```
+http://$host/$service-name/student/$id
 ```

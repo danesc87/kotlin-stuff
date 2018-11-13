@@ -2,6 +2,7 @@ package database
 
 import TestUtilities
 import com.nanobytes.crud.database.DBUtils
+import com.nanobytes.crud.models.Career
 import ninja.sakib.pultusorm.core.PultusORM
 import ninja.sakib.pultusorm.core.PultusORMCondition
 import ninja.sakib.pultusorm.core.enableDebugMode
@@ -28,8 +29,8 @@ class DBUtilsTest {
 
     @Test
     fun shouldCreateANewDBOrConnection(){
-        val dbUtils = DBUtils
-        val testingORM: PultusORM = PultusORM("mscDB.db", System.getProperty("user.dir"))
+        val dbUtils: DBUtils = DBUtils
+        val testingORM = PultusORM("mscDB.db", System.getProperty("user.dir"))
         dbUtils.initOrCreate()
         val ormInstance:PultusORM = dbUtils.pultusORM
 
@@ -60,5 +61,15 @@ class DBUtilsTest {
         val actualCondition: PultusORMCondition = DBUtils.buildConditionById(1)
 
         Assertions.assertEquals(expectedCondition.rawQuery(), actualCondition.rawQuery())
+    }
+
+    @Test
+    fun shouldReturnTrueIfAPartialUpdateWasSuccessfullyApplied() {
+        val result: Boolean = DBUtils.genericPartialUpdate(
+                5,
+                "{\"career\": \"Electric Engineering\"}", Career()
+        )
+
+        Assertions.assertTrue(result)
     }
 }
