@@ -49,7 +49,6 @@ object DBUtils {
             for (key: String in partialBodyMap.keys) {
                 objectUpdater.set(key, partialBodyMap[key]!!)
             }
-            objectUpdater.condition(objectCondition).build()
             return pultusORM.update(
                     classType,
                     objectUpdater.condition(objectCondition).build()
