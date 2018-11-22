@@ -8,13 +8,11 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 class Author(
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        val id: Int = 0,
         @NotBlank
         val name: String,
         @NotBlank
-        val lastName: String,
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Int = 0
-) {
-    private constructor(): this ("","")
-}
+        val lastName: String
+)
