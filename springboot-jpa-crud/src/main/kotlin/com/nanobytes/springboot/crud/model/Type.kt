@@ -7,14 +7,12 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity
-class Author(
+class Type(
         @NotBlank
-        val name: String,
-        @NotBlank
-        val lastName: String,
+        val typeName: String,
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Int = 0
 ) {
-    private constructor(): this ("","")
+    private constructor(): this ("")
 }
