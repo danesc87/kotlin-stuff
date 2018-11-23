@@ -202,8 +202,7 @@ http://$host:$port/$context-path/type/$id
 ```json
 {
   "id": 1,
-  "name": "John",
-  "lastName": "Doe"
+  "typeName": "Manga"
 }
 ```
 

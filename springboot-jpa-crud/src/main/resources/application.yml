@@ -4,11 +4,27 @@ management:
     enabled: FALSE
 
 
-#Server
+# Server
 server:
   port: 8081
   servlet:
     context-path: /springboot-crud/
+
+# Database
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 1234abcd
+  jpa:
+    generate-ddl: TRUE
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: FALSE
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+# use_jdbc_metadata_defaults disable feature detection by this undocumented parameter
+# database-platform because detection is disabled you have to set correct dialect by hand.
 
 
 # Logging
