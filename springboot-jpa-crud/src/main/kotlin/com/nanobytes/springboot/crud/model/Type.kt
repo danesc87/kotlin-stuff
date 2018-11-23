@@ -7,7 +7,7 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity
-class Type(
+class Type (
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Int = 0,
